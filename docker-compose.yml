@@ -11,13 +11,9 @@ services:
       - ./laravel-app:/var/www/html
     ports:
       - "8000:80"
-    environment:
-      - DB_CONNECTION=mysql
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_DATABASE=laravel
-      - DB_USERNAME=laraveluser
-      - DB_PASSWORD=yourpassword
+    # use .env for environment variables
+    env_file:
+      - ./laravel-app/.env
     depends_on:
       - db
 

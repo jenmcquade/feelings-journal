@@ -1,5 +1,5 @@
 ARG XDEBUG_VERSION="xdebug-3"
-FROM php:8.3.7-apache
+FROM php:8.2-apache
 
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 
