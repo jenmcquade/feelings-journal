@@ -1,7 +1,7 @@
 ARG XDEBUG_VERSION="xdebug-3"
 FROM php:8.2-apache
 
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+ENV APACHE_DOCUMENT_ROOT /var/www/html/laravel-app/public
 
 RUN a2enmod rewrite
 
@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
 # generate php.ini
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 # enable xdebug
-RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20230831/xdebug.so" > $PHP_INI_DIR/conf.d/xdebug.ini
+RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20220829/xdebug.so" > $PHP_INI_DIR/conf.d/xdebug.ini
 
 RUN docker-php-ext-install ctype fileinfo mbstring pdo_mysql xml
 
@@ -33,15 +33,29 @@ RUN pecl install xdebug; \
 # add composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
+
+# Install NPM
+RUN apt-get install -y npm
+
+# Install Yarn
+RUN npm install --global yarn
+
+# Install git
+RUN apt-get install -y git
+
 # Copy the current directory contents into the container at /app
-COPY ./laravel-app/ /var/www/html/
+COPY . /var/www/html/
 
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-WORKDIR /var/www/html
+WORKDIR /var/www/html/laravel-app
 
 RUN composer install
 
 # Change the owner of the storage and bootstrap/cache directories to www-data
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/laravel-app/storage /var/www/html/laravel-app/bootstrap/cache
+
+EXPOSE 5173

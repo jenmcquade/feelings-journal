@@ -8,9 +8,10 @@ services:
     container_name: laravel_app
     restart: always
     volumes:
-      - ./laravel-app:/var/www/html
+      - ./:/var/www/html
     ports:
       - "8000:80"
+      - "8001:5173"
     # use .env for environment variables
     env_file:
       - ./laravel-app/.env
