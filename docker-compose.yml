@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: laravel_app
+    container_name: app
     restart: always
     volumes:
       - ./:/var/www/html
@@ -29,6 +29,13 @@ services:
       - MYSQL_PASSWORD=localuser
     volumes:
       - mariadb_data:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - "8002:8080"
 
 volumes:
   mariadb_data:

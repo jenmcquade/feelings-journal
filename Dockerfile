@@ -22,8 +22,6 @@ RUN apt-get update && apt-get install -y \
 
 # generate php.ini
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-# enable xdebug
-RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20220829/xdebug.so" > $PHP_INI_DIR/conf.d/xdebug.ini
 
 RUN docker-php-ext-install ctype fileinfo mbstring pdo_mysql xml
 
@@ -46,10 +44,11 @@ RUN npm install --global yarn
 # Install git
 RUN apt-get install -y git
 
-# Copy the current directory contents into the container at /app
 COPY . /var/www/html/
 
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+
+COPY conf/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 WORKDIR /var/www/html/laravel-app
 
