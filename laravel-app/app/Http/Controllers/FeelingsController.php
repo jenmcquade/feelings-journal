@@ -36,10 +36,6 @@ class FeelingsController extends Controller
         $feelingId = request()->input('feeling_id');
         $user = auth()->user();
 
-        if (!$user) {
-            return response()->json(['error' => 'User not authenticated'], 403);
-        }
-
         $todaysFeelings = $user->todaysFeelings();
 
         if (!$todaysFeelings->exists() || !$todaysFeelings->where('feeling_id', $feelingId)->exists()) {

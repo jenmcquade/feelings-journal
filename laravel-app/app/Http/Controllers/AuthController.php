@@ -28,7 +28,7 @@ class AuthController extends Controller
                 'message' => 'User authenticated', 
                 'user' => $user, 
                 'todays_note' => $user->todaysNote()->first()?->note,
-                'todays_feelings' => $user->todaysFeelings()->get(),
+                'todays_feelings' => $user->todaysFeelings()->get() ?? [],
             ], 200);
         }
 
@@ -57,7 +57,7 @@ class AuthController extends Controller
         $user->password = Hash::make($password);
         $user->save();
 
-        return response()->json(['message' => 'User created', 'user' => $user, 'todays_note' => null, 'todays_feelings' => null], 200);
+        return response()->json(['message' => 'User created', 'user' => $user, 'todays_note' => null, 'todays_feelings' => []], 200);
     }
 
     public function getUser(Request $request)
@@ -67,7 +67,7 @@ class AuthController extends Controller
         return response()->json([
             'user' => $user, 
             'todays_note' => $user->todaysNote()->first()?->note,
-            'todays_feelings' => $user->todaysFeelings()->get(),
+            'todays_feelings' => $user->todaysFeelings()->get() ?? [],
         ], 200);
     }
 

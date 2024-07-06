@@ -23,7 +23,7 @@ function applyFeelingStyles(feeling, parentBgColor, depth = 1) {
 
 function SubmitFeelings() {
 	const [note, setNote] = useState('');
-	const todaysNote = useSelector(state => state.auth.todays_note);
+	const todaysNote = useSelector(state => state.api.todaysNote);
 	const [submittedNote, setSubmittedNote] = useState(todaysNote);
 	const [allFeelingsState, setAllFeelingsState] = useState([]);
 	const allFeelings = useSelector(state => state.api.allFeelings);

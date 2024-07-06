@@ -1,10 +1,12 @@
-import { useDispatch } from 'react-redux';
+import { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { saveFeeling } from '../../api/feelings';
 import { setFeelings } from '../../actions/api';
 
 function FeelingsContainer(props) {
     const dispatch = useDispatch();
-    let { color, textColor, text, children } = props;
+    const feelings = useSelector(state => state.api.todaysFeelings);
+    let { id, color, textColor, text, children } = props;
     if (typeof color == 'undefined' || color.length != 3) {
         color = [0,0,0];
     }
@@ -16,10 +18,10 @@ function FeelingsContainer(props) {
     const className = typeof children === 'undefined' || children.length == 0 ?
         "no-child p-1 grid grid-cols-1 w-full text-sm mb-1" :
         "container p-1 grid grid-cols-1 border rounded-lg mb-2 gap-3";
+    const feeling = useMemo(() => feelings.find(f => f.id == id) || {}, [feelings, id]);
 
-    const saveFeelingInApi = async(e) => {
-        debugger;
-        e.target.classList.add('selected');
+    const sendSaveFeelings = async(e) => {
+        e.target.classList.toggle('selected');
         const feelingId = e.target.getAttribute('feeling-id');
         try {
             const feelingData = await saveFeeling(feelingId);
@@ -33,7 +35,7 @@ function FeelingsContainer(props) {
 
 	return (
 		<div style={{ backgroundColor: bgColorStyle,  color: textColorStyle }} className={className}>
-			<span feeling-id={props.id} className="feeling" onClick={saveFeelingInApi}>{text}</span>
+			<span className={feeling.hasOwnProperty('id') ? 'feeling selected' : 'feeling'} feeling-id={props.id} onClick={sendSaveFeelings}>{text}</span>
             {typeof children === 'undefined' || children.length == 0  ? '' : <div>{children}</div>}
 		</div>
 	)

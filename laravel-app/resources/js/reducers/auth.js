@@ -1,7 +1,6 @@
 const initialState = {
 	'isAuthenticated': false,
 	'user': null,
-	'todays_note': null,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -11,7 +10,6 @@ export const authReducer = (state = initialState, action) => {
 				...state,
 				'isAuthenticated': true,
 				'user': action.data.user,
-				'todays_note': action.data.todays_note,
 			};
 		case 'REMOVE_ACCOUNT_CONTEXT':
 			return {

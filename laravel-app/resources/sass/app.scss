@@ -7,10 +7,8 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
-%feeling-hover-styles {
+%feeling-selected-styles {
     background-color: white !important;
-    transition: box-shadow .25s;
-    cursor: pointer;
 }
 
 // Custom styles
@@ -24,13 +22,15 @@
 .feeling {
 	border-radius: 8px;
 
-	.selected {
-		@extend %feeling-hover-styles;
-	}
-
 	&:hover {
-		@extend %feeling-hover-styles;
+		@extend %feeling-selected-styles;
+		transition: box-shadow .25s;
+		cursor: pointer;
 	}
+}
+
+.selected {
+	@extend %feeling-selected-styles;
 }
 
 .submitted-note {

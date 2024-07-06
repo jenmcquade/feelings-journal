@@ -12,6 +12,13 @@ export const setFeelings = (feelings) => {
 	};
 }
 
+export const setTodaysValuesContext = (todaysValues) => {
+	return {
+		type: 'SET_TODAYS_VALUES_CONTEXT',
+		todaysValues
+	};
+}
+
 export const setAllFeelingsContext = (feelings) => {
 	return {
 		type: 'SET_ALL_FEELINGS_CONTEXT',

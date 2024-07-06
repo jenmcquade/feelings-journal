@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { getUser } from '../api/auth';
 import { getAllFeelings } from '../api/feelings';
 import { setUserContext } from '../actions/auth';
+import { setTodaysValuesContext } from '../actions/api';
 import { setLoadingContext } from '../actions/api';
 import { setAllFeelingsContext } from '../actions/api';
 
@@ -34,6 +35,7 @@ const App = () => {
                 let userData = await getUser();
                 if (userData) {
                     dispatch(setUserContext(userData));
+                    dispatch(setTodaysValuesContext(userData));
                 }
             } catch (error) {
                 console.error('There was an error getting the user.');
