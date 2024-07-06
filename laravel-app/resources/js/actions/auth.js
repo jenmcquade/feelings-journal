@@ -1,7 +1,7 @@
-export const setUserContext = (user) => {
+export const setUserContext = (data) => {
 	return {
 		type: 'SET_ACCOUNT_CONTEXT',
-		user
+		data
 	};
 };
 

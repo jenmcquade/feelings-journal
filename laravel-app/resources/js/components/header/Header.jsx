@@ -8,8 +8,8 @@ import { logout } from "../../api/auth";
 
 function Header() {
 	const dispatch = useDispatch();
-	const user = useSelector(state => state.auth.user);
-	const loading = useSelector(state => state.auth.loading);
+	const authenticated = useSelector(state => state.auth.isAuthenticated);
+	const loading = useSelector(state => state.api.loading);
 
 	const handleLogout = async () => {
 		try {
@@ -25,29 +25,34 @@ function Header() {
 
 	if (loading) {
 		return (
-			<div className="text-white min-w-full">
-				<header className="grid grid-cols-1 items-center gap-2 py-10">
+			<div className="dark:text-white">
+				<header className="grid grid-cols-1 items-center gap-2 py-5">
 					<h1 className="text-4xl font-bold text-center">Nothing More</h1>
-					<p className="text-2xl font-bold text-blue-500">Loading...</p>
+					<div className="flex flex-col justify-center items-center">
+						<p className="text-2xl font-bold text-blue-500">Loading...</p>
+					</div>
 				</header>
 			</div>
 		);
 	}
 
 	return (
-		<div className="text-white min-w-full">
-			<header className="grid grid-cols-1 items-center gap-2 py-10">
+		<div className="dark:text-white">
+			<header className="grid grid-cols-1 items-center gap-2 py-5">
 				<h1 className="text-4xl font-bold text-center">Nothing More</h1>
-				{user ? (
-					<NavLink to="/" className="text-2xl font-bold text-blue-500"
-						onClick={async (event) => {
-							event.preventDefault();
-							await handleLogout();
-						}}
-					>Logout</NavLink>
-				) : (
-					<NavLink to="/login" className="text-2xl font-bold text-blue-500">Login</NavLink>
-				)}
+				<div className="flex flex-col justify-center items-center">
+					{authenticated ? (
+						<NavLink to="/" className="text-2xl font-bold text-blue-500"
+							onClick={async (event) => {
+								event.preventDefault();
+								await handleLogout();
+							}}
+						>Logout</NavLink>
+					) : (
+						<NavLink to="/login" className="text-2xl font-bold text-blue-500">Login</NavLink>
+					)}
+				</div>
+
 			</header>
 		</div>
 	);

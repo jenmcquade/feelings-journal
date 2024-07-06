@@ -1,0 +1,375 @@
+[
+	{
+		"bgColor": [229, 135, 175],
+		"value": "Anger",
+		"feelings": [
+			{
+				"value": "Enraged",
+				"feelings": [
+					{ "value": "Hateful" },
+					{ "value": "Hostile" }
+				]
+			},
+			{
+				"value": "Exasperated",
+				"feelings": [
+					{ "value": "Frustrated" },
+					{ "value": "Agitated" }
+				]
+			},
+			{
+				"value": "Irritable",
+				"feelings": [
+					{ "value": "Annoyed" },
+					{ "value": "Aggravated" }
+				]
+			},
+			{
+				"value": "Jealous",
+				"feelings": [
+					{ "value": "Envious" },
+					{ "value": "Resentful" }
+				]
+			},
+			{
+				"value": "Disgusted",
+				"feelings": [
+					{ "value": "Revolted" },
+					{ "value": "Contemptuous" }
+				]
+			},
+			{
+				"value": "Furious",
+				"feelings": [
+					{ "value": "Infuriated" },
+					{ "value": "Outraged" }
+				]
+			},
+			{
+				"value": "Annoyed",
+				"feelings": [
+					{ "value": "Irritated" },
+					{ "value": "Vexed" }
+				]
+			},
+			{
+				"value": "Aggressive",
+				"feelings": [
+					{ "value": "Hostile" },
+					{ "value": "Antagonistic" }
+				]
+			}
+		]
+	},
+	{
+		"bgColor": [238, 155, 151],
+		"value": "Fear",
+		"feelings": [
+			{
+				"value": "Scared",
+				"feelings": [
+					{ "value": "Frightened" },
+					{ "value": "Helpless" }
+				]
+			},
+			{
+				"value": "Terrified",
+				"feelings": [
+					{ "value": "Panicked" },
+					{ "value": "Hysterical" }
+				]
+			},
+			{
+				"value": "Insecure",
+				"feelings": [
+					{ "value": "Inferior" },
+					{ "value": "Inadequate" }
+				]
+			},
+			{
+				"value": "Nervous",
+				"feelings": [
+					{ "value": "Anxious" },
+					{ "value": "Worried" }
+				]
+			},
+			{
+				"value": "Horrified",
+				"feelings": [
+					{ "value": "Mortified" },
+					{ "value": "Dreadful" }
+				]
+			},
+			{
+				"value": "Powerless",
+				"feelings": [
+					{ "value": "Inferior" },
+					{ "value": "Inadequate" }
+				]
+			},
+			{
+				"value": "Paranoid",
+				"feelings": [
+					{ "value": "Suspicious" },
+					{ "value": "Distrustful" }
+				]
+			},
+			{
+				"value": "Wary",
+				"feelings": [
+					{ "value": "Cautious" },
+					{ "value": "Apprehensive" }
+				]
+			}
+		]
+	},
+	{
+		"bgColor": [253, 235, 169],
+		"textColor": [0, 0, 0],
+		"value": "Love",
+		"feelings": [
+			{
+				"value": "Grateful",
+				"feelings": [
+					{ "value": "Appreciative" },
+					{ "value": "Nostalgic" }
+				]
+			},
+			{
+				"value": "Sentimental",
+				"feelings": [
+					{ "value": "Nostalgic" },
+					{ "value": "Tender" }
+				]
+			},
+			{
+				"value": "Affectionate",
+				"feelings": [
+					{ "value": "Compassionate" },
+					{ "value": "Warmhearted" }
+				]
+			},
+			{
+				"value": "Romantic",
+				"feelings": [
+					{ "value": "Passionate" },
+					{ "value": "Enamored" }
+				]
+			},
+			{
+				"value": "Enchanted",
+				"feelings": [
+					{ "value": "Rapturous" },
+					{ "value": "Enthralled" }
+				]
+			},
+			{
+				"value": "Devoted",
+				"feelings": [
+					{ "value": "Loyal" },
+					{ "value": "Dedicated" }
+				]
+			},
+			{
+				"value": "Intimate",
+				"feelings": [
+					{ "value": "Connected" },
+					{ "value": "Friendly" }
+				]
+			},
+			{
+				"value": "Passionate",
+				"feelings": [
+					{ "value": "Intense" },
+					{ "value": "Fervent" }
+				]
+			}
+		]
+	},
+	{
+		"bgColor": [151, 185, 122],
+		"value": "Joy",
+		"feelings": [
+			{
+				"value": "Euphoric",
+				"feelings": [
+					{ "value": "Elated" },
+					{ "value": "Jubilant" }
+				]
+			},
+			{
+				"value": "Excited",
+				"feelings": [
+					{ "value": "Enthusiastic" },
+					{ "value": "Zealous" }
+				]
+			},
+			{
+				"value": "Optimistic",
+				"feelings": [
+					{ "value": "Hopeful" },
+					{ "value": "Eager" }
+				]
+			},
+			{
+				"value": "Proud",
+				"feelings": [
+					{ "value": "Triumphant" },
+					{ "value": "Illustrious" }
+				]
+			},
+			{
+				"value": "Cheerful",
+				"feelings": [
+					{ "value": "Playful" },
+					{ "value": "Amuzed" }
+				]
+			},
+			{
+				"value": "Happy",
+				"feelings": [
+					{ "value": "Delighted" },
+					{ "value": "Jovial" }
+				]
+			},
+			{
+				"value": "Content",
+				"feelings": [
+					{ "value": "Satisfied" },
+					{ "value": "Pleased" }
+				]
+			},
+			{
+				"value": "Peaceful",
+				"feelings": [
+					{ "value": "Serene" },
+					{ "value": "Tranquil" }
+				]
+			}
+		]
+	},
+	{
+		"bgColor": [102, 173, 187],
+		"value": "Surprise",
+		"feelings": [
+			{
+				"value": "Moved",
+				"feelings": [
+					{ "value": "Touched" },
+					{ "value": "Stimulated" }
+				]
+			},
+			{
+				"value": "Overcome",
+				"feelings": [
+					{ "value": "Astounded" },
+					{ "value": "Speechless" }
+				]
+			},
+			{
+				"value": "Amazed",
+				"feelings": [
+					{ "value": "Awe-struck" },
+					{ "value": "Astonished" }
+				]
+			},
+			{
+				"value": "Confused",
+				"feelings": [
+					{ "value": "Perplexed" },
+					{ "value": "Disillusioned" }
+				]
+			},
+			{
+				"value": "Stunned",
+				"feelings": [
+					{ "value": "Shocked" },
+					{ "value": "Bewildered" }
+				]
+			},
+			{
+				"value": "Astonished",
+				"feelings": [
+					{ "value": "Astounded" },
+					{ "value": "Dumbfounded" }
+				]
+			},
+			{
+				"value": "Incredulous",
+				"feelings": [
+					{ "value": "Disbelieving" },
+					{ "value": "Skeptical" }
+				]
+			},
+			{
+				"value": "Overwhelmed",
+				"feelings": [
+					{ "value": "Dumbfounded" },
+					{ "value": "Bemused" }
+				]
+			}
+		]
+	},
+	{
+		"bgColor": [142, 142, 185],
+		"value": "Sadness",
+		"feelings": [
+			{
+				"value": "Hurt",
+				"feelings": [
+					{ "value": "Agonized" },
+					{ "value": "Disturbed" }
+				]
+			},
+			{
+				"value": "Unhappy",
+				"feelings": [
+					{ "value": "Miserable" },
+					{ "value": "Disheartened" }
+				]
+			},
+			{
+				"value": "Disappointed",
+				"feelings": [
+					{ "value": "Dismayed" },
+					{ "value": "Displeased" }
+				]
+			},
+			{
+				"value": "Shameful",
+				"feelings": [
+					{ "value": "Guilty" },
+					{ "value": "Regretful" }
+				]
+			},
+			{
+				"value": "Lonely",
+				"feelings": [
+					{ "value": "Isolated" },
+					{ "value": "Neglected" }
+				]
+			},
+			{
+				"value": "Gloomy",
+				"feelings": [
+					{ "value": "Depressed" },
+					{ "value": "Hopeless" }
+				]
+			},
+			{
+				"value": "Despairing",
+				"feelings": [
+					{ "value": "Despondent" },
+					{ "value": "Forlorn" }
+				]
+			},
+			{
+				"value": "Grief-stricken",
+				"feelings": [
+					{ "value": "Heartbroken" },
+					{ "value": "Devastated" }
+				]
+			}
+		]
+	}
+]

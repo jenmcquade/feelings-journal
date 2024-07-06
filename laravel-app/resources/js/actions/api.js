@@ -5,9 +5,16 @@ export const setLoadingContext = (loading) => {
 	};
 }
 
-export const submitFeelings = (feelings) => {
+export const setFeelings = (feelings) => {
 	return {
-		type: 'SUBMIT_FEELINGS',
+		type: 'SET_FEELINGS',
+		feelings
+	};
+}
+
+export const setAllFeelingsContext = (feelings) => {
+	return {
+		type: 'SET_ALL_FEELINGS_CONTEXT',
 		feelings
 	};
 }

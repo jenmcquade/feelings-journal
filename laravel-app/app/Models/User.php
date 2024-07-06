@@ -6,7 +6,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Testing\Fluent\Concerns\Has;
 
 class User extends Authenticatable
 {
@@ -44,5 +43,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
+
+    public function feelings()
+    {
+        return $this->belongsToMany(Feeling::class, 'user_feelings')->using(UserFeeling::class)->withPivot('created_at');
+    }
+
+    public function scopeTodaysNote()
+    {
+        return $this->notes()->where('created_at', '>=', now()->today());
+    }
+
+    public function scopeTodaysFeelings()
+    {
+        return $this->feelings()->where('user_feelings.created_at', '>=', now()->today());
     }
 }

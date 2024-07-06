@@ -7,13 +7,13 @@ function Feeling(props) {
         bgColor = [0,0,0];
     }
     if (typeof textColor == 'undefined' || textColor.length != 3) {
-        textColor = [255,255,255];
+        textColor = [0,0,0];
     }
     const bgColorStyle = `rgb(${bgColor[0]},${bgColor[1]},${bgColor[2]})`;
     const textColorStyle = `rgb(${textColor[0]},${textColor[1]},${textColor[2]})`;
     
 	return (
-		<div cclassName="w-full" style={{ backgroundColor: bgColorStyle, color: textColorStyle }}>
+		<div className="w-full text-sm" style={{ backgroundColor: bgColorStyle, color: textColorStyle }}>
 			<span>{value}</span>
 		</div>
 	)

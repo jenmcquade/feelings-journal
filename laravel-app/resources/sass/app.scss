@@ -6,3 +6,38 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+%feeling-hover-styles {
+    background-color: white !important;
+    transition: box-shadow .25s;
+    cursor: pointer;
+}
+
+// Custom styles
+.no-child {
+	border-radius: 8px;
+}
+.no-child:hover {
+	background-color: white !important;
+	cursor: pointer;
+}
+.feeling {
+	border-radius: 8px;
+
+	.selected {
+		@extend %feeling-hover-styles;
+	}
+
+	&:hover {
+		@extend %feeling-hover-styles;
+	}
+}
+
+.submitted-note {
+	border-radius: 8px;
+	font-size: 1.2em;
+
+	.note-value {
+		font-style: italic;
+	}
+}

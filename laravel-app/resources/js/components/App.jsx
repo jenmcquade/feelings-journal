@@ -3,25 +3,37 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import Header from './header/Header';
 import Home from './home/Home';
-import Auth from './auth/Auth';
+import Auth from './forms/auth/Auth';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import store from '../store/store';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUser } from '../api/auth';
+import { getAllFeelings } from '../api/feelings';
 import { setUserContext } from '../actions/auth';
 import { setLoadingContext } from '../actions/api';
+import { setAllFeelingsContext } from '../actions/api';
 
 const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        const setAllFeelings = async () => {
+            try {
+                let feelings = await getAllFeelings();
+                if (feelings) {
+                    dispatch(setAllFeelingsContext(feelings.all_feelings));
+                }
+            } catch (error) {
+                console.error('There was an error getting the feelings.');
+            }
+        }
         const getUserContext = async () => {
             try {
                 dispatch(setLoadingContext(true));
-                let user = await getUser();
-                if (user) {
-                    dispatch(setUserContext(user));
+                let userData = await getUser();
+                if (userData) {
+                    dispatch(setUserContext(userData));
                 }
             } catch (error) {
                 console.error('There was an error getting the user.');
@@ -30,6 +42,7 @@ const App = () => {
             }
         }
 
+        setAllFeelings();
         getUserContext();
     }, [dispatch]);
 

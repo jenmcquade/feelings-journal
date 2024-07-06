@@ -11,7 +11,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
         @viteReactRefresh 
-        @vite(['resources/css/app.css', 'resources/js/components/App.jsx'])
+        @vite(['resources/css/app.css', 'resources/sass/app.scss', 'resources/js/components/App.jsx'])
         @if (app()->isLocal())
             <script type="module" src="http://U:8001/@@vite/client"></script>
             <script type="module" src="http://U:8001/resources/js/app.js"></script>

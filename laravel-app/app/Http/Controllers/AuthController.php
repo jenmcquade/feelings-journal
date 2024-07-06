@@ -24,7 +24,12 @@ class AuthController extends Controller
             }
             
             $user = Auth::user();
-            return response()->json(['message' => 'User authenticated', 'user' => $user], 200);
+            return response()->json([
+                'message' => 'User authenticated', 
+                'user' => $user, 
+                'todays_note' => $user->todaysNote()->first()?->note,
+                'todays_feelings' => $user->todaysFeelings()->get(),
+            ], 200);
         }
 
         return response()->json(['error' => 'Invalid credentials'], 401);
@@ -52,18 +57,22 @@ class AuthController extends Controller
         $user->password = Hash::make($password);
         $user->save();
 
-        return response()->json(['message' => 'User created', 'user' => $user], 200);
+        return response()->json(['message' => 'User created', 'user' => $user, 'todays_note' => null, 'todays_feelings' => null], 200);
     }
 
     public function getUser(Request $request)
     {
         $user = Auth::user();
-        return response()->json(['user' => $user], 200);
+        $todaysNote = $user->notes()->where('created_at', '>=', now()->today())->first();
+        return response()->json([
+            'user' => $user, 
+            'todays_note' => $user->todaysNote()->first()?->note,
+            'todays_feelings' => $user->todaysFeelings()->get(),
+        ], 200);
     }
 
     public function logout(Request $request)
     {
-        Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return response()->json(['message' => 'User logged out'], 200);

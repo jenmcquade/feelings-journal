@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import StatusMessage from './StatusMessage';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUserContext } from '../../actions/auth';
-import { setLoadingContext } from '../../actions/api';
-import { login } from '../../api/auth';
+import { setUserContext } from '../../../actions/auth';
+import { setLoadingContext } from '../../../actions/api';
+import { login } from '../../../api/auth';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -12,19 +12,18 @@ function Login() {
     const [statusMessage, setStatusMessage] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const handleLogin = async (user) => {
-        dispatch(setUserContext(user));
+    const handleLogin = async (userData) => {
+        dispatch(setUserContext(userData));
+        navigate('/');
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             dispatch(setLoadingContext(true));
-            let user = await login(email, password);
-            if (user) {
-                handleLogin(user);
-                navigate('/');
-                return;
+            let userData = await login(email, password);
+            if (userData) {
+                await handleLogin(userData);
             }
         } catch (error) {
             setStatusMessage(error.message);

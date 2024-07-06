@@ -9,10 +9,15 @@ export const apiReducer = (state = initialState, action) => {
 				...state,
 				'loading': action.loading,
 			};
-		case 'SUBMIT_FEELINGS':
+		case 'SET_FEELINGS':
 			return {
 				...state,
 				'feelings': action.feelings,
+			};
+		case 'SET_ALL_FEELINGS_CONTEXT':
+			return {
+				...state,
+				'allFeelings': action.feelings,
 			};
 		default:
 			return state;

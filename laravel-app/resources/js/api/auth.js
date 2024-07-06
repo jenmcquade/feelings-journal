@@ -13,7 +13,7 @@ export async function createAccount(username, email, password, confirmPassword) 
         if (response.status !== 200) {
             return 'There was an error creating your account. Please try again.';
         } else {
-            let user = response.data.user;
+            let user = response.data;
             return user;
         }
     } catch (error) {
@@ -34,7 +34,7 @@ export async function login(email, password) {
                     throw new Error('Invalid email or password');
                 }
                 if (response.status === 200) {
-                    return await response.data.user;
+                    return await response.data;
                 }
             });
     
@@ -56,7 +56,7 @@ export async function getUser() {
         const response = await call('/api/user', 'GET', {});
 
         if (response.status === 200) {
-            let user = response.data.user;
+            let user = response.data;
             return user;
         }
     } catch (error) {

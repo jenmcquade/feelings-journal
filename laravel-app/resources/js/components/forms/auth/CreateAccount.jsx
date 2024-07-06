@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import StatusMessage from './StatusMessage';
 import { useNavigate } from 'react-router-dom';
-import { setUserContext } from '../../actions/auth';
-import { createAccount } from '../../api/auth';
+import { setUserContext } from '../../../actions/auth';
+import { createAccount } from '../../../api/auth';
 
 function CreateAccount() {
     const [email, setEmail] = useState('');
@@ -12,17 +12,17 @@ function CreateAccount() {
     const [statusMessage, setStatusMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const handleLogin = async (user) => {
-        dispatch(setUserContext(user));
+    const handleLogin = async (userData) => {
+        dispatch(setUserContext(userData));
     }
     
     const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
         try {
-            let user = await createAccount(username, email, password, confirmPassword);
-            if (user) {
-                handleLogin(user);
+            let userData = await createAccount(username, email, password, confirmPassword);
+            if (userData) {
+                handleLogin(userData);
                 navigate('/');
                 return;
             }
