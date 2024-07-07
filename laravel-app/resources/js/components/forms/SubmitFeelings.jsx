@@ -1,5 +1,5 @@
 
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useMemo } from 'react';
 import { submitNote } from '../../api/feelings';
 import { setLoadingContext } from '../../actions/api';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,11 +22,14 @@ function applyFeelingStyles(feeling, parentBgColor, depth = 1) {
 }
 
 function SubmitFeelings() {
-	const [note, setNote] = useState('');
 	const todaysNote = useSelector(state => state.api.todaysNote);
-	const [submittedNote, setSubmittedNote] = useState(todaysNote);
-	const [allFeelingsState, setAllFeelingsState] = useState([]);
+	const todaysFeelings = useSelector(state => state.api.todaysFeelings);
 	const allFeelings = useSelector(state => state.api.allFeelings);
+
+	const [note, setNote] = useState(todaysNote);
+	const [submittedNote, setSubmittedNote] = useState(todaysNote);
+	const [transformedFeelingsState, setTransformedFeelingsState] = useState([]);
+
 	const dispatch = useDispatch();
 	const feelingGroupColors = [
 		[229, 135, 175],
@@ -38,7 +41,6 @@ function SubmitFeelings() {
 	];
 
 	useEffect(() => {
-		// Update allFeelings with updated styles
 		if (!allFeelings || allFeelings.length == 0) {
 			return;
 		}
@@ -52,8 +54,39 @@ function SubmitFeelings() {
 			return updatedContainer;
 		});
 
-		setAllFeelingsState(updatedFeelings);
+		setTransformedFeelingsState(updatedFeelings);
 	}, [allFeelings]);
+
+	const storedFeelings = useMemo(() => {
+		if (!transformedFeelingsState || transformedFeelingsState.length == 0 || !todaysFeelings || todaysFeelings.length == 0) {
+			return [];
+		}
+		if (!transformedFeelingsState[0]?.hasOwnProperty('color')) {
+			return [];
+		}
+
+		// recursively go through transformedFeelingsState and find feelings that are in todaysFeelings
+		const stateFeelings = [];
+		const todaysFeelingsIds = todaysFeelings.map(feeling => feeling.id);
+		const findTodaysFeelings = (container) => {
+			if (todaysFeelingsIds.includes(container.id)) {
+				stateFeelings.push(container);
+			}
+			if (!container.hasOwnProperty('children') || container.children.length == 0) {
+				return;
+			}
+			container.children.forEach(feeling => {
+				if (todaysFeelingsIds.includes(feeling.id)) {
+					stateFeelings.push(feeling);
+				}
+				if (feeling.children && feeling.children.length > 0) {
+					findTodaysFeelings(feeling);
+				}
+			}
+		)}
+		transformedFeelingsState.forEach(container => findTodaysFeelings(container));
+		return stateFeelings.filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i);
+	}, [transformedFeelingsState, todaysFeelings]);
 
 	if (!allFeelings || allFeelings.length == 0) {
 		return <div>Loading ...</div>;
@@ -83,10 +116,23 @@ function SubmitFeelings() {
 	return (
 		<div>
 			<h2 className="font-bold text-2xl text-center mb-4">How are you feeling today?</h2>
-			{submittedNote != null
-				? <div className="submitted-note mb-5 text-2xl text-center p-2 rounded-lg">
+			{submittedNote != ""
+				? <div className="submitted-note mb-2 text-center p-2">
 						<span>Your submitted note for today:</span> <br/>
 						<span className="note-value">{submittedNote}</span>
+				</div>
+				: null
+			}
+			{storedFeelings.length > 0
+				? <div className="submitted-feelings mb-5 text-center p-2">
+						<span>Your submitted feelings for today:</span>
+						<div className="flex justify-center">
+							{storedFeelings.map(f => (
+								<div key={f.id} className="submitted-feeling p-1 m-1" style={{ backgroundColor: `rgb(${f.color.join(',')})` }}>
+									{f.text}
+								</div>
+							))}
+						</div>
 				</div>
 				: null
 			}
@@ -98,8 +144,8 @@ function SubmitFeelings() {
 			</div>
 
 			<div className="grid lg:grid-cols-6 sm:grid-cols-3 gap-4 text-center font-bold text-white items-start">
-			{allFeelingsState.map((container, index) => (
-				<FeelingsCategory key={container.id} feelingData={{...container, index}} />
+			{transformedFeelingsState.map((container, index) => (
+				<FeelingsCategory topLevel key={container.id} feelingData={{...container, index}} />
 			))}
 			</div>
 		</div>

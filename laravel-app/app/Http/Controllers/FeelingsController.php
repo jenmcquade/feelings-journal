@@ -36,25 +36,23 @@ class FeelingsController extends Controller
         $feelingId = request()->input('feeling_id');
         $user = auth()->user();
 
-        $todaysFeelings = $user->todaysFeelings();
-
-        if (!$todaysFeelings->exists() || !$todaysFeelings->where('feeling_id', $feelingId)->exists()) {
+        if (!$user->todaysFeelings()->exists() || !$user->todaysFeelings()->where('feeling_id', $feelingId)->exists()) {
             $user->feelings()->attach($feelingId);
 
-            return response()->json(['feelings' => $todaysFeelings->get()], 200);
+            return response()->json(['todays_feelings' => $user->todaysFeelings()->get()], 200);
         }
 
-        $existingFeeling = $todaysFeelings
+        $existingFeeling = $user->todaysFeelings()
             ->where('feeling_id', $feelingId)
             ->first();
 
         if ($existingFeeling) {
             $existingFeeling->pivot->delete();
-            return response()->json(['feelings' => $todaysFeelings->get()], 200);
+            return response()->json(['todays_feelings' => $user->todaysFeelings()->get()], 200);
         }
 
         $user->feelings()->attach($feelingId);
 
-        return response()->json(['feelings' => $todaysFeelings->get()], 200);
+        return response()->json(['todays_feelings' => $user->todaysFeelings()->get()], 200);
     }
 }

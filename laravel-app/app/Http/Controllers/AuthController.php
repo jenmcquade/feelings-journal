@@ -25,7 +25,7 @@ class AuthController extends Controller
             
             $user = Auth::user();
             return response()->json([
-                'message' => 'User authenticated', 
+                'message' => 'User authenticated',
                 'user' => $user, 
                 'todays_note' => $user->todaysNote()->first()?->note,
                 'todays_feelings' => $user->todaysFeelings()->get() ?? [],

@@ -11,6 +11,10 @@
     background-color: white !important;
 }
 
+.subtitle {
+	font-size: 1.1rem;
+}
+
 // Custom styles
 .no-child {
 	border-radius: 8px;
@@ -19,13 +23,29 @@
 	background-color: white !important;
 	cursor: pointer;
 }
-.feeling {
-	border-radius: 8px;
+.feelings-container, .no-child {
+	color: black;
+	&.l1 {
+		font-size:1.15rem;
+		font-weight: 800;
+	}
+	&.l2 {
+		font-size:1.1rem;
+		font-weight: 600;
+	}
+	&.l3 {
+		font-size:1rem;
+		font-weight: 500;
+    }
 
-	&:hover {
-		@extend %feeling-selected-styles;
-		transition: box-shadow .25s;
-		cursor: pointer;
+	.feeling {
+		border-radius: 8px;
+	
+		&:hover {
+			@extend %feeling-selected-styles;
+			transition: box-shadow .25s;
+			cursor: pointer;
+		}
 	}
 }
 
@@ -34,10 +54,20 @@
 }
 
 .submitted-note {
-	border-radius: 8px;
 	font-size: 1.2em;
 
 	.note-value {
 		font-style: italic;
+	}
+}
+
+.submitted-feelings {
+	font-size: 1.2em;
+
+	.submitted-feeling {
+		margin-right: 5px;
+		border-radius: 8px;
+		min-width: 10em;
+		color: black;
 	}
 }

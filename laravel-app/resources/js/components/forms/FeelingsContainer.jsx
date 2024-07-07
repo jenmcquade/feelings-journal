@@ -6,7 +6,7 @@ import { setFeelings } from '../../actions/api';
 function FeelingsContainer(props) {
     const dispatch = useDispatch();
     const feelings = useSelector(state => state.api.todaysFeelings);
-    let { id, color, textColor, text, children } = props;
+    let { id, color, textColor, text, children, topLevel } = props;
     if (typeof color == 'undefined' || color.length != 3) {
         color = [0,0,0];
     }
@@ -14,10 +14,11 @@ function FeelingsContainer(props) {
         textColor = [0,0,0];
     }
     const bgColorStyle = `rgb(${color[0]},${color[1]},${color[2]})`;
-    const textColorStyle = `rgb(${textColor[0]},${textColor[1]},${textColor[2]})`;
+    const textColorStyle = `rgb($π{textColor[0]},${textColor[1]},${textColor[2]})`;
+    const containerLevel = topLevel ? 'l1' : 'l2';
     const className = typeof children === 'undefined' || children.length == 0 ?
-        "no-child p-1 grid grid-cols-1 w-full text-sm mb-1" :
-        "container p-1 grid grid-cols-1 border rounded-lg mb-2 gap-3";
+        "no-child p-1 grid grid-cols-1 w-full mb-1 l3" :
+        "feelings-container p-1 grid grid-cols-1 border rounded-lg mb-2 gap-1 " + containerLevel;
     const feeling = useMemo(() => feelings.find(f => f.id == id) || {}, [feelings, id]);
 
     const sendSaveFeelings = async(e) => {
@@ -25,6 +26,7 @@ function FeelingsContainer(props) {
         const feelingId = e.target.getAttribute('feeling-id');
         try {
             const feelingData = await saveFeeling(feelingId);
+            debugger;
             if (feelingData) {
                 dispatch(setFeelings(feelingData));
             }

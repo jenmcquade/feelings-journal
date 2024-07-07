@@ -3,7 +3,7 @@ import StatusMessage from './StatusMessage';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUserContext } from '../../../actions/auth';
-import { setLoadingContext, setAllFeelingsContext } from '../../../actions/api';
+import { setLoadingContext, setTodaysValuesContext} from '../../../actions/api';
 import { login } from '../../../api/auth';
 
 function Login() {
@@ -14,7 +14,7 @@ function Login() {
     const dispatch = useDispatch();
     const handleLogin = async (userData) => {
         dispatch(setUserContext(userData));
-        dispatch(setAllFeelingsContext(userData));
+        dispatch(setTodaysValuesContext(userData));
         navigate('/');
     }
 

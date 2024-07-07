@@ -2,19 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class FeelingRepository
 {
     public function getNestedFeelings()
     {
-        $allFeelings = Feeling::all();
-        $feelingsByParent = [];
-        foreach ($allFeelings as $feeling) {
-            $feelingsByParent[$feeling->parent_id][] = $feeling;
+        $cacheKey = 'nested_feelings';
+
+        $nestedFeelings = Cache::store('file')->get($cacheKey);
+
+        if (!$nestedFeelings) {
+            $allFeelings = Feeling::all();
+            $feelingsByParent = [];
+            foreach ($allFeelings as $feeling) {
+                $feelingsByParent[$feeling->parent_id][] = $feeling;
+            }
+            $nestedFeelings = $this->buildNestedFeelings($feelingsByParent, null);
+            Cache::store('file')->put($cacheKey, $nestedFeelings, 1440);
         }
-        $nestedFeelings = $this->buildNestedFeelings($feelingsByParent, null);
 
         return $nestedFeelings;
     }

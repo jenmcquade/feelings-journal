@@ -6,6 +6,15 @@ import { setLoadingContext } from "../../actions/api";
 import { useDispatch } from "react-redux";
 import { logout } from "../../api/auth";
 
+function Heading() {
+	return (
+		<>
+			<h1 className="text-4xl font-bold text-center">Nothing More</h1>
+			<h2 className="subtitle italic text-center">Track your daily feelings to visualize your mental health.</h2>
+		</>
+	);
+}
+
 function Header() {
 	const dispatch = useDispatch();
 	const authenticated = useSelector(state => state.auth.isAuthenticated);
@@ -27,7 +36,7 @@ function Header() {
 		return (
 			<div className="dark:text-white">
 				<header className="grid grid-cols-1 items-center gap-2 py-5">
-					<h1 className="text-4xl font-bold text-center">Nothing More</h1>
+					<Heading />
 					<div className="flex flex-col justify-center items-center">
 						<p className="text-2xl font-bold text-blue-500">Loading...</p>
 					</div>
@@ -39,7 +48,7 @@ function Header() {
 	return (
 		<div className="dark:text-white">
 			<header className="grid grid-cols-1 items-center gap-2 py-5">
-				<h1 className="text-4xl font-bold text-center">Nothing More</h1>
+				<Heading />
 				<div className="flex flex-col justify-center items-center">
 					{authenticated ? (
 						<NavLink to="/" className="text-2xl font-bold text-blue-500"

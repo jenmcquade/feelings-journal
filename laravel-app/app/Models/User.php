@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function feelings()
     {
-        return $this->belongsToMany(Feeling::class, 'user_feelings')->using(UserFeeling::class)->withPivot('created_at');
+        return $this->belongsToMany(Feeling::class, 'user_feelings')->using(UserFeeling::class)->withPivot(['created_at']);
     }
 
     public function scopeTodaysNote()

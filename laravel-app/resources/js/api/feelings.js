@@ -7,7 +7,7 @@ export async function saveFeeling(feelingId) {
         if (response.status !== 200) {
             return 'There was an error submitting your feelings. Please try again.';
         } else {
-            return response.data;
+            return response.data.todays_feelings;
         }
     } catch (error) {
         return 'There was an error submitting your feelings. Please try again.';

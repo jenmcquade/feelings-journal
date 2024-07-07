@@ -14,9 +14,10 @@ export const apiReducer = (state = initialState, action) => {
 				'loading': action.loading,
 			};
 		case 'SET_FEELINGS':
+			debugger;
 			return {
 				...state,
-				'feelings': action.feelings,
+				'todaysFeelings': action.feelings,
 			};
 		case 'SET_ALL_FEELINGS_CONTEXT':
 			return {

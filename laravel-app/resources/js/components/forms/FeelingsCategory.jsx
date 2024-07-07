@@ -1,6 +1,6 @@
 import FeelingsContainer from "./FeelingsContainer";
 
-const FeelingsCategory = ({ feelingData }) => {
+const FeelingsCategory = ({ feelingData, topLevel }) => {
 	if (typeof feelingData.color == 'undefined' || feelingData.color.length != 3) {
 		feelingData.color = [0,0,0];
 	}
@@ -9,7 +9,7 @@ const FeelingsCategory = ({ feelingData }) => {
 	}
 
 	return (
-	  <FeelingsContainer key={feelingData.id} {...feelingData}>
+	  <FeelingsContainer topLevel={topLevel ?? false} key={feelingData.id} {...feelingData}>
 		{feelingData.children && feelingData.children.map(function (nestedFeeling, index) {
 		  return <FeelingsCategory key={nestedFeeling.id} feelingData={{...nestedFeeling, index}} />
 		})}
