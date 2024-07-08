@@ -5,10 +5,10 @@ export const setLoadingContext = (loading) => {
 	};
 }
 
-export const setFeelings = (feelings) => {
+export const setFeelings = (todaysFeelings) => {
 	return {
 		type: 'SET_FEELINGS',
-		feelings
+		todaysFeelings
 	};
 }
 

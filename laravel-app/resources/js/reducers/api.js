@@ -1,6 +1,5 @@
 const initialState = {
 	'loading': false,
-	'feelings': [],
 	'allFeelings': [],
 	'todaysNote': '',
 	'todaysFeelings': [],
@@ -14,10 +13,9 @@ export const apiReducer = (state = initialState, action) => {
 				'loading': action.loading,
 			};
 		case 'SET_FEELINGS':
-			debugger;
 			return {
 				...state,
-				'todaysFeelings': action.feelings,
+				'todaysFeelings': action.todaysFeelings,
 			};
 		case 'SET_ALL_FEELINGS_CONTEXT':
 			return {
@@ -27,8 +25,8 @@ export const apiReducer = (state = initialState, action) => {
 		case 'SET_TODAYS_VALUES_CONTEXT':
 			return {
 				...state,
-				'todaysNote': action.todaysValues.todays_note ?? '',
-				'todaysFeelings': action.todaysValues.todays_feelings
+				'todaysNote': action.todaysValues?.todays_note ?? '',
+				'todaysFeelings': action.todaysValues?.todays_feelings
 			};
 		default:
 			return state;

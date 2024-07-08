@@ -1,4 +1,4 @@
-import call from './utils';
+import { call } from './utils';
 
 export async function saveFeeling(feelingId) {
     try {
@@ -35,7 +35,7 @@ export async function getAllFeelings() {
         if (response.status !== 200) {
             return 'There was an error retrieving feelings. Please try again.';
         } else {
-            return response.data;
+            return response.data.all_feelings;
         }
     } catch (error) {
         return 'There was an error retrieving feelings. Please try again.';

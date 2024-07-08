@@ -22,6 +22,7 @@ function applyFeelingStyles(feeling, parentBgColor, depth = 1) {
 }
 
 function SubmitFeelings() {
+	const dispatch = useDispatch();
 	const todaysNote = useSelector(state => state.api.todaysNote);
 	const todaysFeelings = useSelector(state => state.api.todaysFeelings);
 	const allFeelings = useSelector(state => state.api.allFeelings);
@@ -30,7 +31,6 @@ function SubmitFeelings() {
 	const [submittedNote, setSubmittedNote] = useState(todaysNote);
 	const [transformedFeelingsState, setTransformedFeelingsState] = useState([]);
 
-	const dispatch = useDispatch();
 	const feelingGroupColors = [
 		[229, 135, 175],
 		[238, 155, 151],
@@ -124,11 +124,11 @@ function SubmitFeelings() {
 				: null
 			}
 			{storedFeelings.length > 0
-				? <div className="submitted-feelings mb-5 text-center p-2">
+				? <div className="submitted-feelings mb-5 text-center lg:px-20">
 						<span>Your submitted feelings for today:</span>
-						<div className="flex justify-center">
+						<div className="grid lg:grid-cols-3 lg:gap-5 sm:grid-cols-1">
 							{storedFeelings.map(f => (
-								<div key={f.id} className="submitted-feeling p-1 m-1" style={{ backgroundColor: `rgb(${f.color.join(',')})` }}>
+								<div key={f.id} className="submitted-feeling p-1 m-1 grid" style={{ backgroundColor: `rgb(${f.color.join(',')})` }}>
 									{f.text}
 								</div>
 							))}

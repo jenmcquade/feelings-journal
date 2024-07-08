@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import Header from './header/Header';
 import Home from './home/Home';
 import Auth from './forms/auth/Auth';
@@ -19,34 +19,31 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const setAllFeelings = async () => {
-            try {
-                let feelings = await getAllFeelings();
-                if (feelings) {
-                    dispatch(setAllFeelingsContext(feelings.all_feelings));
-                }
-            } catch (error) {
-                console.error('There was an error getting the feelings.');
-            }
-        }
-        const getUserContext = async () => {
+        const fetchData = async () => {
             try {
                 dispatch(setLoadingContext(true));
-                let userData = await getUser();
+                const [feelings, userData] = await Promise.all([
+                    getAllFeelings(),
+                    getUser(),
+                ]);
+    
+                if (feelings) {
+                    dispatch(setAllFeelingsContext(feelings));
+                }
+    
                 if (userData) {
                     dispatch(setUserContext(userData));
                     dispatch(setTodaysValuesContext(userData));
                 }
             } catch (error) {
-                console.error('There was an error getting the user.');
+                console.error('There was an error loading initial data.');
             } finally {
                 dispatch(setLoadingContext(false));
             }
-        }
-
-        setAllFeelings();
-        getUserContext();
-    }, [dispatch]);
+        };
+    
+        fetchData();
+    }, [dispatch]); 
 
     return (
         <React.StrictMode>

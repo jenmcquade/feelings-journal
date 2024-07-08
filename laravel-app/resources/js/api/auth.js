@@ -1,5 +1,5 @@
 import axios from 'axios';
-import call from './utils';
+import { call } from './utils';
 
 export async function createAccount(username, email, password, confirmPassword) {
     try {

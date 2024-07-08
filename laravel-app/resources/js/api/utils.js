@@ -24,4 +24,8 @@ async function call(endpoint, method, data) {
     }
 }
 
-export default call;
+function deepClone(obj) {
+    return JSON.parse(JSON.stringify(obj));
+}
+
+export { call, deepClone };
