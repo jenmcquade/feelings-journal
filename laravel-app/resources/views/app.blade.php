@@ -6,18 +6,11 @@
 
         <title>NothingMore</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-
         @viteReactRefresh 
-        @vite(['resources/css/app.css', 'resources/sass/app.scss', 'resources/js/components/App.jsx'])
+        @vite(['resources/js/app.js', 'resources/js/components/App.jsx'])
         @if (app()->isLocal())
             <script type="module" src="http://U:8001/@@vite/client"></script>
             <script type="module" src="http://U:8001/resources/js/app.js"></script>
-        @else
-            <script src="{{ mix('js/app.js') }}"></script>
-            <link href="{{ mix('css/app.css') }}" rel="stylesheet">
         @endif
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">

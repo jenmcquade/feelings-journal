@@ -86,11 +86,7 @@ function SubmitFeelings() {
 		)}
 		transformedFeelingsState.forEach(container => findTodaysFeelings(container));
 		return stateFeelings.filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i);
-	}, [transformedFeelingsState, todaysFeelings]);
-
-	if (!allFeelings || allFeelings.length == 0) {
-		return <div>Loading ...</div>;
-	}
+	}, [transformedFeelingsState, todaysFeelings, allFeelings]);
 
 	const handleNoteInputChange = (e) => {
 		setNote(e.target.value);
@@ -126,9 +122,9 @@ function SubmitFeelings() {
 			{storedFeelings.length > 0
 				? <div className="submitted-feelings mb-5 text-center lg:px-20">
 						<span>Your submitted feelings for today:</span>
-						<div className="grid lg:grid-cols-3 lg:gap-5 sm:grid-cols-1">
+						<div className="flex flex-wrap justify-center">
 							{storedFeelings.map(f => (
-								<div key={f.id} className="submitted-feeling p-1 m-1 grid" style={{ backgroundColor: `rgb(${f.color.join(',')})` }}>
+								<div key={f.id} className="submitted-feeling p-1 m-1" style={{ backgroundColor: `rgb(${f.color.join(',')})` }}>
 									{f.text}
 								</div>
 							))}
