@@ -41,10 +41,6 @@ function SubmitFeelings() {
 	];
 
 	useEffect(() => {
-		if (!allFeelings || allFeelings.length == 0) {
-			return;
-		}
-
 		const updatedFeelings = allFeelings.map((container, index) => {
 			const updatedContainer = { ...container };
 			updatedContainer.color = feelingGroupColors[index];
